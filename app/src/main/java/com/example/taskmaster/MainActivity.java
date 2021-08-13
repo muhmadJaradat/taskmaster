@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,11 +48,13 @@ public class MainActivity extends AppCompatActivity {
         String name = sp.getString("name","Username still not provided");
         userViewName.setText(name);
 
-        List tasks = new ArrayList();
-        tasks.add(new Task("workout","was easy", "complete "));
-        tasks.add(new Task("making dinner","it took too long", "complete"));
-        tasks.add(new Task("read a book","will finish it tomorrow", "in progress"));
+        AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+                AppDataBase.class, "tasks_master")
+                .allowMainThreadQueries().build();
 
+        DataAccessObject tasksDao = db.tasksDao();
+
+        List tasks = tasksDao.getAllTasks();
         RecyclerView recyclerView = findViewById(R.id.rvTasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         TaskAdapter adapter = new TaskAdapter(tasks);
