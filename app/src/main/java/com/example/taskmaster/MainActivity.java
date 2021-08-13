@@ -1,6 +1,8 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +11,9 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
         String name = sp.getString("name","Username still not provided");
         userViewName.setText(name);
 
+        List tasks = new ArrayList();
+        tasks.add(new Task("one","will finish at 8 pm", "dead man "));
+        tasks.add(new Task("two","will finish at 9 pm", "disable"));
+        tasks.add(new Task("three","will finish at 11 pm", "done"));
+
+        RecyclerView recyclerView = findViewById(R.id.rvTasks);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        TaskAdapter adapter = new TaskAdapter(tasks);
+        recyclerView.setAdapter(adapter);
 
     }
 
