@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
         userViewName.setText(name);
 
         List tasks = new ArrayList();
-        tasks.add(new Task("one","will finish at 8 pm", "dead man "));
-        tasks.add(new Task("two","will finish at 9 pm", "disable"));
-        tasks.add(new Task("three","will finish at 11 pm", "done"));
+        tasks.add(new Task("workout","was easy", "complete "));
+        tasks.add(new Task("making dinner","it took too long", "complete"));
+        tasks.add(new Task("read a book","will finish it tomorrow", "in progress"));
 
         RecyclerView recyclerView = findViewById(R.id.rvTasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
