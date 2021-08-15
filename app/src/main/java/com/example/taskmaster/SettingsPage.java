@@ -24,7 +24,7 @@ public class SettingsPage extends AppCompatActivity {
         savePreferenceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText userNameView = findViewById(R.id.userName);
+                EditText userNameView = findViewById(R.id.settingsUserName);
                 String userName= userNameView.getText().toString();
 
                 userValues.putString("name",userName);
