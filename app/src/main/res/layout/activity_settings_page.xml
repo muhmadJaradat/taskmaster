@@ -7,28 +7,26 @@
     tools:context=".SettingsPage">
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/settingsUserName"
         android:layout_width="224dp"
         android:layout_height="46dp"
         android:layout_marginStart="113dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="User Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209" />
+        app:layout_constraintVertical_bias="0.209"
+         />
 
     <Button
         android:id="@+id/setting_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="139dp"
-        android:layout_marginLeft="139dp"
         android:layout_marginEnd="107dp"
-        android:layout_marginRight="107dp"
         android:text="Save User Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
