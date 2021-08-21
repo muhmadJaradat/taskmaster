@@ -55,3 +55,7 @@
 * A database was added so the user Can Save tasks from add task screen
 
 ![](./screenshots/lab29_home.png)
+
+## Lab 32
+
+In this lab I changed the add task and main activity to create new tasks and save it to dynamoDB and also to retrieve the data from it
