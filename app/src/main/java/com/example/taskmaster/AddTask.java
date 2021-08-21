@@ -5,9 +5,13 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
 
 
 public class AddTask extends AppCompatActivity {
@@ -31,14 +35,16 @@ public class AddTask extends AppCompatActivity {
         String body = bodyText.getText().toString();
         String status = "new";
 
-        Task task = new Task(title, body, status);
-
-        AppDataBase db = Room.databaseBuilder(getApplicationContext(),
-                AppDataBase.class, "tasks_master")
-                .allowMainThreadQueries().build();
-
-        DataAccessObject tasksDao = db.tasksDao();
-        tasksDao.insertOne(task);
+        Task item = Task.builder()
+                .title(title)
+                .body(body)
+                .state(status)
+                .build();
+        Amplify.DataStore.save(
+                item,
+                success -> Log.i("Amplify", "Saved item: " + success.item().getId()),
+                error -> Log.e("Amplify", "Could not save item to DataStore", error)
+        );
 
         TextView text = findViewById(R.id.submitted);
         text.setVisibility(View.VISIBLE);
