@@ -43,6 +43,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder( TaskAdapter.ViewHolder holder, int position) {
         String task =   "Title: "+ tasks.get(position).getTitle() + "\n" +
+                "Team: "+tasks.get(position).getTeam() + "\n"+
                 "Body: "+ tasks.get(position).getBody() + "\n" +
                 "Status: " + tasks.get(position).getState();
         holder.textView.setText(task);
