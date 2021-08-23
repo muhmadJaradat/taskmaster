@@ -70,3 +70,9 @@ also in the settings activity the user now can choose his team and the tasks wil
 In this lab I made an apk for this application so it can be published for google store
 
 ![](./screenshots/apk.JPG)
+
+## Lab36
+
+In this lab I added a signup and signin pages using amplify authentication 
+
+![](./screenshots/lab36.png)

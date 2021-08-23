@@ -40,6 +40,8 @@ public class AddTask extends AppCompatActivity {
         list = new ArrayList<>();
         list.add("");
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Add New Task");
 
         setContentView(R.layout.activity_add_task);
         spinner = findViewById(R.id.spinner);
