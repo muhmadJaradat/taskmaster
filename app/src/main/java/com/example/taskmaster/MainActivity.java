@@ -3,7 +3,6 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +19,6 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.Team;
 
@@ -39,29 +37,48 @@ public class MainActivity extends AppCompatActivity {
         amplifyConf();
 tasks=new ArrayList<>();
 
-//        addingNewTeams();
+
+//            Team item = Team.builder()
+//                    .name("Red Team")
+//                    .build();
+//            Amplify.API.mutate(
+//                    ModelMutation.create(item),
+//                    success -> Log.i("Amplify", "Saved item: " + success.getData().getName()),
+//                    error -> Log.e("Amplify", "Could not save item to DataStore", error)
+//            );
+//
+//            Team item2 = Team.builder()
+//                    .name("Blue Team")
+//                    .build();
+//            Amplify.API.mutate(
+//                    ModelMutation.create(item2),
+//                    success -> Log.i("Amplify", "Saved item: " + success.getData().getName()),
+//                    error -> Log.e("Amplify", "Could not save item to DataStore", error)
+//            );
+//
+//            Team item3 = Team.builder()
+//                    .name("Yellow Team")
+//                    .build();
+//            Amplify.API.mutate(
+//                    ModelMutation.create(item3),
+//                    success -> Log.i("Amplify", "Saved item: " + success.getData().getName()),
+//                    error -> Log.e("Amplify", "Could not save item to DataStore", error)
+//            );
+
 
         Button addTask = findViewById(R.id.add_task);
 
-        addTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddTask.class);
-                startActivity(intent);
-            }
+        addTask.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddTask.class);
+            startActivity(intent);
         });
 
 
         Button allTasks = findViewById(R.id.all_tasks);
 
-        allTasks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AllTasks.class);
-                startActivity(intent);
-            }
-
-            ;
+        allTasks.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AllTasks.class);
+            startActivity(intent);
         });
         TextView userViewName = findViewById(R.id.shared_user_name);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -73,15 +90,12 @@ tasks=new ArrayList<>();
         if (!teamID.equals("null"))gettingTasks(teamID);
 
         handler=new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                RecyclerView recyclerView = findViewById(R.id.rvTasks);
-                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                TaskAdapter adapter = new TaskAdapter(tasks);
-                recyclerView.setAdapter(adapter);
+        handler.postDelayed(() -> {
+            RecyclerView recyclerView = findViewById(R.id.rvTasks);
+            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            TaskAdapter adapter = new TaskAdapter(tasks);
+            recyclerView.setAdapter(adapter);
 
-            }
         },3000);
 
 
@@ -114,35 +128,7 @@ tasks=new ArrayList<>();
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
     }
-public void addingNewTeams(){
-    Team item = Team.builder()
-            .name("Red Team")
-            .build();
-    Amplify.API.mutate(
-            ModelMutation.create(item),
-            success -> Log.i("Amplify", "Saved item: " + success.getData().getName()),
-            error -> Log.e("Amplify", "Could not save item to DataStore", error)
-    );
 
-    Team item2 = Team.builder()
-            .name("Blue Team")
-            .build();
-    Amplify.API.mutate(
-            ModelMutation.create(item2),
-            success -> Log.i("Amplify", "Saved item: " + success.getData().getName()),
-            error -> Log.e("Amplify", "Could not save item to DataStore", error)
-    );
-
-    Team item3 = Team.builder()
-            .name("Yellow Team")
-            .build();
-    Amplify.API.mutate(
-            ModelMutation.create(item3),
-            success -> Log.i("Amplify", "Saved item: " + success.getData().getName()),
-            error -> Log.e("Amplify", "Could not save item to DataStore", error)
-    );
-
-}
 public void gettingTasks(String teamID){
     Amplify.API.query(
             ModelQuery.list(Task.class,Task.TEAM.contains(teamID)),

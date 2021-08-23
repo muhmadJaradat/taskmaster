@@ -64,3 +64,9 @@ In this lab I changed the add task and main activity to create new tasks and sav
 
 In this lab the add task activity now add the new task to the amplify api with the team,
 also in the settings activity the user now can choose his team and the tasks will appear in the homepage based on his team
+
+## Lab34
+
+In this lab I made an apk for this application so it can be published for google store
+
+![](./screenshots/apk.JPG)
