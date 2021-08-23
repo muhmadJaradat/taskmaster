@@ -10,5 +10,5 @@
         android:id="@+id/titleRV"
         android:layout_width="match_parent"
         android:layout_height="167dp"
-        android:text="title" />
+        android:text="@string/title" />
 </LinearLayout>

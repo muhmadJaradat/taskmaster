@@ -1,17 +1,16 @@
 package com.example.taskmaster;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -58,20 +57,17 @@ list.add("");
         SharedPreferences.Editor userValues = sp.edit();
 
         Button savePreferenceButton = findViewById(R.id.setting_button);
-        savePreferenceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText userNameView = findViewById(R.id.settingsUserName);
-                String userName= userNameView.getText().toString();
-                Team team=teams.get(spinner.getSelectedItemPosition()-1);
+        savePreferenceButton.setOnClickListener(v -> {
+            EditText userNameView = findViewById(R.id.settingsUserName);
+            String userName= userNameView.getText().toString();
+            Team team=teams.get(spinner.getSelectedItemPosition()-1);
 
-                userValues.putString("name",userName);
-                userValues.putString("teamID",team.getId());
-                userValues.apply();
+            userValues.putString("name",userName);
+            userValues.putString("teamID",team.getId());
+            userValues.apply();
 
-                Intent mainActivityIntent = new Intent(SettingsPage.this, MainActivity.class);
-                startActivity(mainActivityIntent);
-            }
+            Intent mainActivityIntent = new Intent(SettingsPage.this, MainActivity.class);
+            startActivity(mainActivityIntent);
         });
 
 

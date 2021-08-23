@@ -10,23 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.datastore.generated.model.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
-    private List<Task> tasks =new ArrayList<Task>();
+    private final List<Task> tasks;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         private final TextView textView;
 
         public ViewHolder(View view){
             super(view);
-            textView = (TextView) view.findViewById(R.id.titleRV);
+            textView = view.findViewById(R.id.titleRV);
         }
 
-        public View getTextView() {
-            return textView;
-        }
     }
     public TaskAdapter(List<Task> list){
         tasks = list;

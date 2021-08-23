@@ -10,7 +10,7 @@
         android:id="@+id/taskTitleDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="373dp"
         android:layout_height="69dp"
-        android:text="Lorem Ipsum Text View discription for the task like a task details"
+        android:text="@string/lorem_ipsum_text_view_discription_for_the_task_like_a_task_details"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.578"

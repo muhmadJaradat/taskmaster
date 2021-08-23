@@ -9,4 +9,23 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="add_task">Add Task</string>
+    <string name="my_task">My Task</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_discription">Task Discription</string>
+    <string name="do_something">Do Something</string>
+    <string name="submitted">Submitted</string>
+    <string name="todo">TODO</string>
+    <string name="all_tasks">All Tasks</string>
+    <string name="my_tasks">My Tasks</string>
+    <string name="task_one">task one</string>
+    <string name="task_two">Task Two</string>
+    <string name="task_three">Task Three</string>
+    <string name="setting_page">Setting Page</string>
+    <string name="display_username">display username</string>
+    <string name="user_name">User Name</string>
+    <string name="save_user_name">Save User Name</string>
+    <string name="textview">TextView</string>
+    <string name="lorem_ipsum_text_view_discription_for_the_task_like_a_task_details">Lorem Ipsum Text View discription for the task like a task details</string>
+    <string name="title">title</string>
 </resources>
