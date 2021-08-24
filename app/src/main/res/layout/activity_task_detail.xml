@@ -6,71 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".view.TaskDetail">
 
-  
+
     <TextView
 
         android:id="@+id/taskDetailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="56dp"
-        android:text="@string/task_details"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/taskDetails"
-        android:layout_width="351dp"
-        android:layout_height="235dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/lorem_ipsum"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDetailTitle" />
-
-    <TextView
-        android:id="@+id/taskDetailState"
+        android:id="@+id/taskDetailDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="56dp"
-        android:text="@string/task_details"
-        android:textSize="24sp"
+        android:layout_marginTop="128dp"
+        android:text="@string/lorem_ipsum"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDetails" />
+        app:layout_constraintTop_toTopOf="parent"  />
+
+    <TextView
+        android:id="@+id/taskDetailStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailDetail"  />
 
     <TextView
         android:id="@+id/taskDetailLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="56dp"
-        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDetailState" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailImageView" />
 
     <ImageView
-        android:id="@+id/taskDetailImg"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="28dp"
+        android:id="@+id/taskDetailImageView"
+        android:layout_width="284dp"
+        android:layout_height="379dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDetailLink"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailStatus"
+        tools:srcCompat="@tools:sample/backgrounds/scenic"  />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -76,3 +76,12 @@ In this lab I made an apk for this application so it can be published for google
 In this lab I added a signup and signin pages using amplify authentication 
 
 ![](./screenshots/lab36.png)
+
+## Lab37 
+
+In this lab I implement the AWS S3 storage in this project where the user can upload a file with a new task and this file will be associated with the task.
+So if there is an uploaded file that is associated with any task it will be shown in the Task Detail page as an image if it is image or there will be a link to download the file if it not an image
+
+This Image shows how the Task Detail looks with the uploaded file as an image:
+
+![](./screenshots/lab37.png)

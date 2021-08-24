@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +18,6 @@ import com.amplifyframework.core.Amplify;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Objects;
@@ -44,11 +42,11 @@ public class TaskDetail extends AppCompatActivity {
         taskTitleID.setText(taskTitle);
 
         String taskBody = getIntent().getStringExtra(MainActivity.TASK_BODY);
-        TextView taskBodyID = findViewById(R.id.taskDetails);
+        TextView taskBodyID = findViewById(R.id.taskDetailDetail);
         taskBodyID.setText(taskBody);
 
         String taskState = getIntent().getStringExtra(MainActivity.TASK_STATUS);
-        TextView taskStateID = findViewById(R.id.taskDetailState);
+        TextView taskStateID = findViewById(R.id.taskDetailStatus);
         taskStateID.setText(taskState);
 
         Intent intent = getIntent();
@@ -56,7 +54,7 @@ public class TaskDetail extends AppCompatActivity {
 handler=new Handler();
 handler.postDelayed(()->{
 
-    ImageView imageView = findViewById(R.id.taskDetailImg);
+    ImageView imageView = findViewById(R.id.taskDetailImageView);
 
     Amplify.Storage.downloadFile(
             fileName,
