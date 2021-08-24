@@ -14,40 +14,60 @@ import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private final List<Task> tasks;
+    private final OnTaskItemClickListener listener;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        private final TextView textView;
-
-        public ViewHolder(View view){
-            super(view);
-            textView = view.findViewById(R.id.titleRV);
-        }
-
+    public TaskAdapter(List<Task> tasks, OnTaskItemClickListener listener) {
+        this.tasks = tasks;
+        this.listener = listener;
     }
-    public TaskAdapter(List<Task> list){
-        tasks = list;
+
+
+    public interface OnTaskItemClickListener {
+        void onItemClicked(int position);
+
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.task_list_layout, parent, false);
-        return new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout,parent,false);
+        return new ViewHolder(view,listener);
     }
 
     @Override
-    public void onBindViewHolder( TaskAdapter.ViewHolder holder, int position) {
-        String task =   "Title: "+ tasks.get(position).getTitle() + "\n" +
-                "Team: "+tasks.get(position).getTeam() + "\n"+
-                "Body: "+ tasks.get(position).getBody() + "\n" +
-                "Status: " + tasks.get(position).getState();
-        holder.textView.setText(task);
+    public void onBindViewHolder( @NonNull TaskAdapter.ViewHolder holder, int position) {
+        Task item = tasks.get(position);
+        holder.title.setText(item.getTitle());
+        holder.body.setText(item.getBody());
+        holder.status.setText(item.getState());
 //
     }
 
     @Override
     public int getItemCount() {
         return  tasks.size();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView title;
+        private final TextView body;
+        private final TextView status;
+
+        ViewHolder(@NonNull View itemView, OnTaskItemClickListener listener) {
+            super(itemView);
+
+            title = itemView.findViewById(R.id.title_label);
+            body = itemView.findViewById(R.id.body_label);
+            status = itemView.findViewById(R.id.status_label);
+
+            itemView.setOnClickListener(v -> listener.onItemClicked(getAdapterPosition()));
+
+
+        }
+
+
+
+
     }
 }

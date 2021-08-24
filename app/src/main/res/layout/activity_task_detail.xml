@@ -4,29 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TaskDetail">
+    tools:context=".view.TaskDetail">
 
+  
     <TextView
-        android:id="@+id/taskTitleDetail"
+
+        android:id="@+id/taskDetailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textview"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/task_details"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="373dp"
-        android:layout_height="69dp"
-        android:text="@string/lorem_ipsum_text_view_discription_for_the_task_like_a_task_details"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/taskDetails"
+        android:layout_width="351dp"
+        android:layout_height="235dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/lorem_ipsum"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.454" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailTitle" />
+
+    <TextView
+        android:id="@+id/taskDetailState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/task_details"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDetails" />
+
+    <TextView
+        android:id="@+id/taskDetailLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="56dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailState" />
+
+    <ImageView
+        android:id="@+id/taskDetailImg"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailLink"
+        android:contentDescription="@string/todo" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

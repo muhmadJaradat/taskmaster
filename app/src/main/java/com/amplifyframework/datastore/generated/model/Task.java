@@ -1,19 +1,21 @@
 package com.amplifyframework.datastore.generated.model;
 
-import static com.amplifyframework.core.model.query.predicate.QueryField.field;
+import com.amplifyframework.core.model.annotations.BelongsTo;
+import com.amplifyframework.core.model.temporal.Temporal;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
 import com.amplifyframework.core.model.Model;
-import com.amplifyframework.core.model.annotations.BelongsTo;
 import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
 import com.amplifyframework.core.model.query.predicate.QueryField;
-import com.amplifyframework.core.model.temporal.Temporal;
 
-import java.util.Objects;
-import java.util.UUID;
+import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
 /** This is an auto generated class representing the Task type in your schema. */
 @SuppressWarnings("all")
@@ -25,11 +27,13 @@ public final class Task implements Model {
   public static final QueryField TITLE = field("Task", "title");
   public static final QueryField BODY = field("Task", "body");
   public static final QueryField STATE = field("Task", "state");
+  public static final QueryField ATTACHED_FILE = field("Task", "attachedFile");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="Team", isRequired = true) @BelongsTo(targetName = "teamID", type = Team.class) Team team;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String", isRequired = true) String body;
   private final @ModelField(targetType="String") String state;
+  private final @ModelField(targetType="String") String attachedFile;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -52,6 +56,10 @@ public final class Task implements Model {
       return state;
   }
   
+  public String getAttachedFile() {
+      return attachedFile;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -60,12 +68,13 @@ public final class Task implements Model {
       return updatedAt;
   }
   
-  private Task(String id, Team team, String title, String body, String state) {
+  private Task(String id, Team team, String title, String body, String state, String attachedFile) {
     this.id = id;
     this.team = team;
     this.title = title;
     this.body = body;
     this.state = state;
+    this.attachedFile = attachedFile;
   }
   
   @Override
@@ -81,6 +90,7 @@ public final class Task implements Model {
               ObjectsCompat.equals(getTitle(), task.getTitle()) &&
               ObjectsCompat.equals(getBody(), task.getBody()) &&
               ObjectsCompat.equals(getState(), task.getState()) &&
+              ObjectsCompat.equals(getAttachedFile(), task.getAttachedFile()) &&
               ObjectsCompat.equals(getCreatedAt(), task.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), task.getUpdatedAt());
       }
@@ -94,6 +104,7 @@ public final class Task implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getState())
+      .append(getAttachedFile())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -109,6 +120,7 @@ public final class Task implements Model {
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
+      .append("attachedFile=" + String.valueOf(getAttachedFile()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -143,6 +155,7 @@ public final class Task implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -152,7 +165,8 @@ public final class Task implements Model {
       team,
       title,
       body,
-      state);
+      state,
+      attachedFile);
   }
   public interface TeamStep {
     TitleStep team(Team team);
@@ -173,6 +187,7 @@ public final class Task implements Model {
     Task build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep state(String state);
+    BuildStep attachedFile(String attachedFile);
   }
   
 
@@ -182,6 +197,7 @@ public final class Task implements Model {
     private String title;
     private String body;
     private String state;
+    private String attachedFile;
     @Override
      public Task build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -191,7 +207,8 @@ public final class Task implements Model {
           team,
           title,
           body,
-          state);
+          state,
+          attachedFile);
     }
     
     @Override
@@ -221,6 +238,12 @@ public final class Task implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep attachedFile(String attachedFile) {
+        this.attachedFile = attachedFile;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -244,12 +267,13 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Team team, String title, String body, String state) {
+    private CopyOfBuilder(String id, Team team, String title, String body, String state, String attachedFile) {
       super.id(id);
       super.team(team)
         .title(title)
         .body(body)
-        .state(state);
+        .state(state)
+        .attachedFile(attachedFile);
     }
     
     @Override
@@ -270,6 +294,11 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder state(String state) {
       return (CopyOfBuilder) super.state(state);
+    }
+    
+    @Override
+     public CopyOfBuilder attachedFile(String attachedFile) {
+      return (CopyOfBuilder) super.attachedFile(attachedFile);
     }
   }
   

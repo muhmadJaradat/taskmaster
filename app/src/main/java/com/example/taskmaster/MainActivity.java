@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,14 +23,20 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.Team;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static final String TASK_TITLE ="taskTitle" ;
+    public static final String TASK_BODY = "taskBody";
+    public static final String TASK_STATUS = "taskState";
+    public static final String TASK_FILE = "taskFile";
     List<Task> tasks;
     Handler handler;
+  private static   TaskAdapter  adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,11 +102,29 @@ tasks=new ArrayList<>();
         handler=new Handler();
         handler.postDelayed(() -> {
             RecyclerView recyclerView = findViewById(R.id.rvTasks);
-            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-            TaskAdapter adapter = new TaskAdapter(tasks);
-            recyclerView.setAdapter(adapter);
+            adapter = new TaskAdapter(tasks, new TaskAdapter.OnTaskItemClickListener() {
+                @Override
+                public void onItemClicked(int position) {
+                    Intent goToDetailsIntent = new Intent(getApplicationContext(), TaskDetail.class);
+                    goToDetailsIntent.putExtra(TASK_TITLE, tasks.get(position).getTitle());
+                    goToDetailsIntent.putExtra(TASK_BODY, tasks.get(position).getBody());
+                    goToDetailsIntent.putExtra(TASK_STATUS, tasks.get(position).getState());
+                    goToDetailsIntent.putExtra(TASK_FILE, tasks.get(position).getAttachedFile());
 
-        },3000);
+                    startActivity(goToDetailsIntent);
+                }
+
+
+            });
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                    this,
+                    LinearLayoutManager.VERTICAL,
+                    false);            recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+                    },3000);
 
 
 
@@ -125,6 +150,7 @@ tasks=new ArrayList<>();
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
@@ -174,4 +200,9 @@ public void gettingTasks(String teamID){
 
     );
 }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private static void listItemDeleted() {
+        adapter.notifyDataSetChanged();
+    }
 }
