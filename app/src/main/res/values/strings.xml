@@ -13,10 +13,18 @@
     <string name="my_task">My Task</string>
     <string name="task_title">Task Title</string>
     <string name="task_discription">Task Discription</string>
+    <string name="task_details">Task Details</string>
+    <string name="link">link</string>
+    <string name="lorem_ipsum"></string>
     <string name="do_something">Do Something</string>
     <string name="submitted">Submitted</string>
     <string name="todo">TODO</string>
     <string name="all_tasks">All Tasks</string>
+    <string name="title_label">title_label</string>
+    <string name="body_label">body_label</string>
+    <string name="status_label">status_label</string>
+    <string name="delete">delete</string>
+
     <string name="my_tasks">My Tasks</string>
     <string name="task_one">task one</string>
     <string name="task_two">Task Two</string>

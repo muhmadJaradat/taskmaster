@@ -10,6 +10,7 @@ import java.util.Objects;
 import androidx.core.util.ObjectsCompat;
 
 import com.amplifyframework.core.model.Model;
+import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
 import com.amplifyframework.core.model.query.predicate.QueryField;
@@ -80,7 +81,14 @@ public final class Team implements Model {
   
   @Override
    public String toString() {
-    return getName();
+    return new StringBuilder()
+      .append("Team {")
+      .append("id=" + String.valueOf(getId()) + ", ")
+      .append("name=" + String.valueOf(getName()) + ", ")
+      .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
+      .append("updatedAt=" + String.valueOf(getUpdatedAt()))
+      .append("}")
+      .toString();
   }
   
   public static NameStep builder() {
