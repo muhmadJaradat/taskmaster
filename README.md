@@ -85,3 +85,11 @@ So if there is an uploaded file that is associated with any task it will be show
 This Image shows how the Task Detail looks with the uploaded file as an image:
 
 ![](./screenshots/lab37.png)
+
+## Lab38
+
+In this Lab I added the Firebase notification system where you can send a notification and after pressing on it the application will run:
+
+This is an image for the notification message :
+
+![](./screenshots/lab38.png)
