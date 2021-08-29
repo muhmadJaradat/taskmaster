@@ -50,6 +50,25 @@ public class AddTask extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Get intent, action and MIME type
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                handleSendText(intent); // Handle text being sent
+                Log.i(TAG, "onCreate: type is text");
+            } else if (type.startsWith("image/")) {
+                handleSendImage(intent); // Handle single image being sent
+                Log.i(TAG, "onCreate: type is image");
+            }
+        } 
+
+
+
+  
         super.onCreate(savedInstanceState);
         teams = new ArrayList<>();
         gettingTeams();
@@ -190,5 +209,19 @@ public class AddTask extends AppCompatActivity {
                 }
         );
         return fileName;
+    }
+
+    void handleSendText(Intent intent) {
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (sharedText != null) {
+            // Update UI to reflect text being shared
+        }
+    }
+
+    void handleSendImage(Intent intent) {
+        Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+        if (imageUri != null) {
+            uploadFile= new File(imageUri.getPath());
+        }
     }
 }

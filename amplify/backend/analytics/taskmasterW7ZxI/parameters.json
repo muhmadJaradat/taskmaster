@@ -1,0 +1,22 @@
+{
+    "appName": "taskmasterW7ZxI",
+    "roleName": "pinpointLambdaRoled0e9d8ef",
+    "cloudformationPolicyName": "cloudformationPolicyd0e9d8ef",
+    "cloudWatchPolicyName": "cloudWatchPolicyd0e9d8ef",
+    "pinpointPolicyName": "pinpointPolicyd0e9d8ef",
+    "authPolicyName": "pinpoint_amplify_d0e9d8ef",
+    "unauthPolicyName": "pinpoint_amplify_d0e9d8ef",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "appId": "23dc8c1e7c4a4782aa4348962405695e"
+}

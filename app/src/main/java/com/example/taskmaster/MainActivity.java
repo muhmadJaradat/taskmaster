@@ -24,6 +24,8 @@ import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
 import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.analytics.AnalyticsEvent;
+import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -97,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
         getPinpointManager(getApplicationContext());
 
 
+
         amplifyConf();
+        callAnalytics();
 tasks=new ArrayList<>();
 
 //        addingNewTeams();
@@ -204,12 +208,25 @@ tasks=new ArrayList<>();
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
+            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
             Amplify.configure(getApplicationContext());
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+    }
+
+    public void callAnalytics(){
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("PasswordReset")
+                .addProperty("Channel", "SMS")
+                .addProperty("Successful", true)
+                .addProperty("ProcessDuration", 792)
+                .addProperty("UserAge", 120.3)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
     }
 public void addingNewTeams(){
     Team item = Team.builder()
@@ -254,8 +271,5 @@ public void gettingTasks(String teamID){
     );
 }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private static void listItemDeleted() {
-        adapter.notifyDataSetChanged();
-    }
+
 }
