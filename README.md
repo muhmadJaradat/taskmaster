@@ -93,3 +93,11 @@ In this Lab I added the Firebase notification system where you can send a notifi
 This is an image for the notification message :
 
 ![](./screenshots/lab38.png)
+
+## Lab41
+
+In this Lab I added an intent filter with action of send to the add task activity where the user can share a photo from any application with this application , also I added a handler to recive the image
+
+![](./screenshots/sendImage.png)
+
+![](./screenshots/addTaskIntentFilter.JPG)
