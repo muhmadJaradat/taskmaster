@@ -49,44 +49,49 @@ public class TaskDetail extends AppCompatActivity {
         TextView taskStateID = findViewById(R.id.taskDetailStatus);
         taskStateID.setText(taskState);
 
+
+        TextView taskAddressID = findViewById(R.id.taskDetailTextViewAddress);
+        String taskAddress=getIntent().getStringExtra(MainActivity.TASK_ADDRESS);
+        if (taskAddress!=null)taskAddressID.setText(taskAddress);
+
         Intent intent = getIntent();
         String fileName = intent.getExtras().get(MainActivity.TASK_FILE).toString();
-handler=new Handler();
-handler.postDelayed(()->{
+        handler=new Handler();
+        handler.postDelayed(()->{
 
-    ImageView imageView = findViewById(R.id.taskDetailImageView);
+            ImageView imageView = findViewById(R.id.taskDetailImageView);
 
-    Amplify.Storage.downloadFile(
-            fileName,
-            new File(getApplicationContext().getFilesDir() + fileName),
-            result -> {
-                Log.i(TAG, "Successfully downloaded: " + result.getFile().getAbsoluteFile());
-                String type= null;
-                try {
-                    type = Files.probeContentType(result.getFile().toPath());
-                    Log.i(TAG, "onCreate: "+type.split("/")[0]);
-                    if (type.split("/")[0].equals("image")){
-                        imageView.setImageBitmap(BitmapFactory.decodeFile(result.getFile().getPath()));
-                    }
-                    else {
-                        String linkedText = String.format("<a href=\"%s\">download File</a> ", url);
+            Amplify.Storage.downloadFile(
+                    fileName,
+                    new File(getApplicationContext().getFilesDir() + fileName),
+                    result -> {
+                        Log.i(TAG, "Successfully downloaded: " + result.getFile().getAbsoluteFile());
+                        String type= null;
+                        try {
+                            type = Files.probeContentType(result.getFile().toPath());
+                            Log.i(TAG, "onCreate: "+type.split("/")[0]);
+                            if (type.split("/")[0].equals("image")){
+                                imageView.setImageBitmap(BitmapFactory.decodeFile(result.getFile().getPath()));
+                            }
+                            else {
+                                String linkedText = String.format("<a href=\"%s\">download File</a> ", url);
 
-                        TextView test = findViewById(R.id.taskDetailLink);
-                        test.setText(Html.fromHtml(linkedText));
-                        test.setMovementMethod(LinkMovementMethod.getInstance());
-                    }
-                } catch (IOException e) {
-                    Log.i(TAG, "onCreate: "+e);
-                    e.printStackTrace();
-                }
+                                TextView test = findViewById(R.id.taskDetailLink);
+                                test.setText(Html.fromHtml(linkedText));
+                                test.setMovementMethod(LinkMovementMethod.getInstance());
+                            }
+                        } catch (IOException e) {
+                            Log.i(TAG, "onCreate: "+e);
+                            e.printStackTrace();
+                        }
 
-                assert type != null;
+                        assert type != null;
 
-            },
-            error -> Log.e(TAG,  "Download Failure", error)
-    );
+                    },
+                    error -> Log.e(TAG,  "Download Failure", error)
+            );
 
-},3000);
+        },3000);
         getURlFromS3Storage(fileName);
 
 
