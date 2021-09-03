@@ -43,6 +43,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG ="MainActivity" ;
+    public static final String TASK_ADDRESS = "taskAddress";
     private static PinpointManager pinpointManager;
 
     public static final String TASK_TITLE ="taskTitle" ;
@@ -167,6 +168,7 @@ tasks=new ArrayList<>();
                     goToDetailsIntent.putExtra(TASK_BODY, tasks.get(position).getBody());
                     goToDetailsIntent.putExtra(TASK_STATUS, tasks.get(position).getState());
                     goToDetailsIntent.putExtra(TASK_FILE, tasks.get(position).getAttachedFile());
+                    goToDetailsIntent.putExtra(TASK_ADDRESS,tasks.get(position).getAddress());
 
                     startActivity(goToDetailsIntent);
                 }
@@ -205,11 +207,13 @@ tasks=new ArrayList<>();
     public void amplifyConf() {
         try {
             // Add these lines to add the AWSApiPlugin plugins
+
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(getApplication()));
             Amplify.configure(getApplicationContext());
+
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {

@@ -101,3 +101,11 @@ In this Lab I added an intent filter with action of send to the add task activit
 ![](./screenshots/sendImage.png)
 
 ![](./screenshots/addTaskIntentFilter.JPG)
+
+## Lab42 
+
+In this lab I added an algorithm to add the current location with each added task to s3 storage. And then show this location for a specific task in the task detail page
+
+This Image shows the location as longitude and latitude:
+
+![](./screenshots/lab42.png)

@@ -28,12 +28,14 @@ public final class Task implements Model {
   public static final QueryField BODY = field("Task", "body");
   public static final QueryField STATE = field("Task", "state");
   public static final QueryField ATTACHED_FILE = field("Task", "attachedFile");
+  public static final QueryField ADDRESS = field("Task", "address");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="Team", isRequired = true) @BelongsTo(targetName = "teamID", type = Team.class) Team team;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String", isRequired = true) String body;
   private final @ModelField(targetType="String") String state;
   private final @ModelField(targetType="String") String attachedFile;
+  private final @ModelField(targetType="String") String address;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -60,6 +62,10 @@ public final class Task implements Model {
       return attachedFile;
   }
   
+  public String getAddress() {
+      return address;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -68,13 +74,14 @@ public final class Task implements Model {
       return updatedAt;
   }
   
-  private Task(String id, Team team, String title, String body, String state, String attachedFile) {
+  private Task(String id, Team team, String title, String body, String state, String attachedFile, String address) {
     this.id = id;
     this.team = team;
     this.title = title;
     this.body = body;
     this.state = state;
     this.attachedFile = attachedFile;
+    this.address = address;
   }
   
   @Override
@@ -91,6 +98,7 @@ public final class Task implements Model {
               ObjectsCompat.equals(getBody(), task.getBody()) &&
               ObjectsCompat.equals(getState(), task.getState()) &&
               ObjectsCompat.equals(getAttachedFile(), task.getAttachedFile()) &&
+              ObjectsCompat.equals(getAddress(), task.getAddress()) &&
               ObjectsCompat.equals(getCreatedAt(), task.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), task.getUpdatedAt());
       }
@@ -105,6 +113,7 @@ public final class Task implements Model {
       .append(getBody())
       .append(getState())
       .append(getAttachedFile())
+      .append(getAddress())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -121,6 +130,7 @@ public final class Task implements Model {
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
       .append("attachedFile=" + String.valueOf(getAttachedFile()) + ", ")
+      .append("address=" + String.valueOf(getAddress()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -156,6 +166,7 @@ public final class Task implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -166,7 +177,8 @@ public final class Task implements Model {
       title,
       body,
       state,
-      attachedFile);
+      attachedFile,
+      address);
   }
   public interface TeamStep {
     TitleStep team(Team team);
@@ -188,6 +200,7 @@ public final class Task implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep state(String state);
     BuildStep attachedFile(String attachedFile);
+    BuildStep address(String address);
   }
   
 
@@ -198,6 +211,7 @@ public final class Task implements Model {
     private String body;
     private String state;
     private String attachedFile;
+    private String address;
     @Override
      public Task build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -208,7 +222,8 @@ public final class Task implements Model {
           title,
           body,
           state,
-          attachedFile);
+          attachedFile,
+          address);
     }
     
     @Override
@@ -244,6 +259,12 @@ public final class Task implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep address(String address) {
+        this.address = address;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -267,13 +288,14 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Team team, String title, String body, String state, String attachedFile) {
+    private CopyOfBuilder(String id, Team team, String title, String body, String state, String attachedFile, String address) {
       super.id(id);
       super.team(team)
         .title(title)
         .body(body)
         .state(state)
-        .attachedFile(attachedFile);
+        .attachedFile(attachedFile)
+        .address(address);
     }
     
     @Override
@@ -299,6 +321,11 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder attachedFile(String attachedFile) {
       return (CopyOfBuilder) super.attachedFile(attachedFile);
+    }
+    
+    @Override
+     public CopyOfBuilder address(String address) {
+      return (CopyOfBuilder) super.address(address);
     }
   }
   

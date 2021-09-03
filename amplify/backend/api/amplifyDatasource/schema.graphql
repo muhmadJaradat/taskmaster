@@ -8,6 +8,7 @@ type Task @model
   body: String!
   state: String
   attachedFile:String
+  address: String
 }
 
 type Team @model{
