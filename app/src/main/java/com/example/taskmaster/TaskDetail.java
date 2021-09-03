@@ -91,7 +91,7 @@ public class TaskDetail extends AppCompatActivity {
                     error -> Log.e(TAG,  "Download Failure", error)
             );
 
-        },3000);
+        },9000);
         getURlFromS3Storage(fileName);
 
 
