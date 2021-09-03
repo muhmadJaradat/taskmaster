@@ -109,3 +109,9 @@ In this lab I added an algorithm to add the current location with each added tas
 This Image shows the location as longitude and latitude:
 
 ![](./screenshots/lab42.png)
+
+## Lab39 
+
+In this lab I added amplify analytics to collect data about the application
+
+![](./screenshots/lab39.JPG)
